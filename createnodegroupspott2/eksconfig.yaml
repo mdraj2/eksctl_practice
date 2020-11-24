@@ -1,0 +1,18 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: mycluster-2
+  region: ap-southeast-2
+
+nodeGroups:
+  - name: ng-1-workers
+    labels: { role: workers }
+    desiredCapacity: 2
+    instancesDistribution:
+      maxPrice: 0.005
+      instanceTypes: ["t2.micro"]
+      onDemandBaseCapacity: 0
+      onDemandPercentageAboveBaseCapacity: 50 #the lower the number the more the amount of spot instances
+    volumeSize: 10
+    privateNetworking: true
