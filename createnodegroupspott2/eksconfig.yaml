@@ -13,6 +13,6 @@ nodeGroups:
       maxPrice: 0.005
       instanceTypes: ["t2.micro"]
       onDemandBaseCapacity: 0
-      onDemandPercentageAboveBaseCapacity: 50 #the lower the number the more the amount of spot instances
+      onDemandPercentageAboveBaseCapacity: 0
     volumeSize: 10
     privateNetworking: true
