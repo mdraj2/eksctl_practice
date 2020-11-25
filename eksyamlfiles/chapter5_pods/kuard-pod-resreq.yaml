@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+spec:
+  containers:
+    - image: gcr.io/kuar-demo/kuard-amd64:blue
+      name: kuard
+      #each container will request resouces (not per Pod).
+      #Total resouces requested by the pod is the sum of all resouces requested by all the containers in the pod
+      #the request will specify the minimum amount of resources requred.
+      #For more info checkout page 58 on the kubernetes up & running
+      #Memory requests are a bit different and best to have a look at the book to understand why
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "128Mi"
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP

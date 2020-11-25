@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+spec:
+  containers:
+    - image: gcr.io/kuar-demo/kuard-amd64:blue
+      name: kuard
+      #will retart the container in the pod if something is wrong. Readness will restart a pod (need to check the second statement)
+      livenessProbe:
+        httpGet:
+          path: /healthy
+          port: 8080
+          #will wait 5 seconds after the container has started to make httpGet
+        initialDelaySeconds: 5
+        #status report must be obtained in 1 second
+        timeoutSeconds: 1
+        #frequency of the get requests
+        periodSeconds: 10
+        #number of failures allowed
+        failureThreshold: 3
+      ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
